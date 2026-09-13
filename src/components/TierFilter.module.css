@@ -1,0 +1,50 @@
+.row {
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  /* Bleed the gutters to the screen edge so the row scrolls edge to edge. */
+  margin: 0 calc(var(--gutter) * -1);
+  padding: 2px var(--gutter) 4px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.row::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  flex: 0 0 auto;
+  min-width: 42px;
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-heading);
+  font-size: 14px;
+  letter-spacing: 0.01em;
+  /* Inactive: the tier's own tint, with the tint ink that belongs to it. */
+  border: 1px solid var(--color-neutral-300);
+  color: var(--tier-tint-ink);
+  background: var(--tier-tint);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+/* Active: the solid band. At 14px display type this is the one place a chip
+   sits on a band, and Caprasimo at 14px is a display face, not body copy. */
+.active {
+  border-color: transparent;
+  color: var(--tier-ink);
+  background: var(--tier-band);
+}
+
+/* "All" and "Half-logged" are not tiers: neutral-200/800 at rest, neutral-800
+   fill when active. */
+.neutral {
+  color: var(--color-neutral-800);
+  background: var(--color-neutral-200);
+}
+
+.neutral.active {
+  color: var(--color-neutral-100);
+  background: var(--color-neutral-800);
+}

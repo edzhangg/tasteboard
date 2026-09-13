@@ -1,0 +1,234 @@
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px var(--gutter) 6px;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 42px;
+  padding: 0 14px 0 11px;
+  border: 1px solid var(--color-neutral-300);
+  background: var(--color-neutral-200);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-neutral-800);
+  text-decoration: none;
+}
+
+.back:hover {
+  color: var(--color-neutral-900);
+  background: var(--color-neutral-300);
+}
+
+.backArrow {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.navToggle {
+  margin-left: auto;
+}
+
+.titleBlock {
+  padding: 10px var(--gutter) 0;
+}
+
+.title {
+  font-size: 34px;
+  line-height: 1.02;
+  color: var(--color-accent-800);
+}
+
+.titleMeta {
+  font-size: 13px;
+  color: var(--color-neutral-700);
+  margin-top: 7px;
+  letter-spacing: 0.01em;
+}
+
+/* — score hero — */
+.heroWrap {
+  padding: 16px var(--gutter) 0;
+}
+
+.hero {
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  background: var(--tier-tint);
+  border: 1px solid transparent;
+}
+
+.heroHalf {
+  border-color: var(--color-neutral-400);
+}
+
+.heroInner {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.medallion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 92px;
+  height: 92px;
+  border-radius: var(--radius-pill);
+  color: var(--tier-ink);
+  background: var(--tier-band);
+  box-shadow: var(--shadow-md);
+}
+
+.medallionHalf {
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(46, 43, 37, 0.1) 0 8px,
+    transparent 8px 16px
+  );
+}
+
+.medallionLetter {
+  font-family: var(--font-heading);
+  font-size: 42px;
+  line-height: 0.8;
+}
+
+/* 19px bold clears the display-size threshold for text on a colour band. */
+.medallionScore {
+  font-size: 19px;
+  font-weight: 700;
+  margin-top: 3px;
+}
+
+.heroRight {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.kicker {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-neutral-700);
+}
+
+.personRow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.personName {
+  font-size: 11px;
+  font-weight: 700;
+  width: 34px;
+  flex: 0 0 auto;
+}
+
+.jenn {
+  color: var(--person-jenn);
+}
+
+.eddy {
+  color: var(--person-eddy);
+}
+
+.personTrack {
+  flex: 1;
+  height: 9px;
+  border-radius: var(--radius-pill);
+  background: var(--color-neutral-300);
+  overflow: hidden;
+}
+
+.personFill {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--tier-bar);
+}
+
+.personScore {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-neutral-900);
+  width: 46px;
+  flex: 0 0 auto;
+  text-align: right;
+}
+
+.personTier {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  color: var(--color-neutral-800);
+}
+
+/* — visits — */
+.section {
+  padding: 22px var(--gutter) 0;
+}
+
+.sectionLabel {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-neutral-700);
+  margin-bottom: 12px;
+}
+
+.visitList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* — sticky CTA — */
+.footer {
+  position: sticky;
+  bottom: 0;
+  margin-top: auto;
+  padding: 18px var(--gutter) 20px;
+  background: linear-gradient(to top, var(--color-bg) 60%, transparent);
+}
+
+.cta {
+  width: 100%;
+  min-height: 56px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent-700);
+  color: var(--color-neutral-100);
+  font-family: var(--font-heading);
+  font-size: 16.5px;
+  box-shadow: var(--shadow-md);
+  transition: background-color 0.15s ease;
+}
+
+.cta:hover {
+  background: var(--color-accent-600);
+}
+
+.cta:active {
+  background: var(--color-accent-700);
+}
+
+.missing {
+  padding: 60px var(--gutter);
+  text-align: center;
+  color: var(--color-neutral-700);
+  font-size: 14px;
+}

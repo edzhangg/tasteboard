@@ -1,0 +1,161 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.medallion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 84px;
+  height: 84px;
+  border-radius: var(--radius-pill);
+  color: var(--tier-ink);
+  background: var(--tier-band);
+  box-shadow: var(--shadow-md);
+}
+
+.medallionLetter {
+  font-family: var(--font-heading);
+  font-size: 38px;
+  line-height: 0.8;
+}
+
+.field {
+  flex: 1;
+  min-width: 0;
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-neutral-700);
+}
+
+.input {
+  width: 100%;
+  margin-top: 2px;
+  padding: 0;
+  border: none;
+  border-bottom: 2px solid var(--color-neutral-300);
+  background: transparent;
+  font-family: var(--font-heading);
+  font-size: 52px;
+  line-height: 1.1;
+  color: var(--color-neutral-900);
+}
+
+.input:focus-visible {
+  outline: none;
+  border-bottom-color: var(--color-accent);
+}
+
+.hint {
+  font-size: 11.5px;
+  color: var(--color-neutral-700);
+  margin-top: 5px;
+}
+
+.word {
+  font-weight: 700;
+  color: var(--color-neutral-900);
+}
+
+.steppers {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+.step {
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-neutral-300);
+  background: var(--color-bg);
+  font-size: 20px;
+  color: var(--color-neutral-800);
+}
+
+.step:hover {
+  background: var(--color-neutral-200);
+}
+
+/* — track — */
+.track {
+  position: relative;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  touch-action: none;
+  cursor: pointer;
+}
+
+/* Banded in tier tints at the TRUE boundaries, so the colour under the thumb
+   tells you which tier a drag has landed in. */
+.rail {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 16px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-neutral-300);
+  overflow: hidden;
+  background: linear-gradient(
+    to right,
+    var(--color-neutral-300) 0 40%,
+    var(--color-neutral-200) 40% 60%,
+    var(--color-accent-2-100) 60% 70%,
+    var(--color-accent-2-200) 70% 80%,
+    var(--color-accent-100) 80% 95%,
+    var(--color-accent-200) 95% 100%
+  );
+}
+
+.fill {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--tier-bar);
+}
+
+.thumb {
+  position: absolute;
+  top: 50%;
+  width: 32px;
+  height: 32px;
+  margin-left: -16px;
+  margin-top: -16px;
+  border-radius: var(--radius-pill);
+  background: var(--color-neutral-100);
+  border: 3px solid var(--color-accent-700);
+  box-shadow: var(--shadow-md);
+  pointer-events: none;
+}
+
+/* Tick letters sit at their tier MIDPOINTS, not evenly spaced — even spacing
+   would misrepresent where a drag lands. */
+.ticks {
+  position: relative;
+  height: 18px;
+  font-family: var(--font-heading);
+  font-size: 12px;
+  color: var(--color-neutral-700);
+}
+
+.tick {
+  position: absolute;
+  transform: translateX(-50%);
+}

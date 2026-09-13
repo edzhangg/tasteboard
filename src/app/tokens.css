@@ -1,0 +1,154 @@
+/* ════════════════════════════════════════════════════════════════════════════
+   Organic — design tokens.
+   The single source of truth for colour, type, spacing, radii and elevation.
+   Mirrors the token tables in design_handoff_tasteboard/README.md exactly.
+   Never inline a hex value in a component; add a token here instead.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* — colour roles — */
+  --color-bg: #f5ead8;
+  --color-surface: #ebddc5;
+  --color-text: #201e1d;
+  --color-accent: #c67139;
+  --color-accent-2: #7a8a5e;
+  --color-divider: color-mix(in srgb, #201e1d 16%, transparent);
+
+  /* — ramps (100 → 900, one shared perceptual lightness scale) — */
+  --color-neutral-100: #f9f4ed;
+  --color-neutral-200: #eee7db;
+  --color-neutral-300: #dcd3c4;
+  --color-neutral-400: #c0b6a5;
+  --color-neutral-500: #a19786;
+  --color-neutral-600: #82796a;
+  --color-neutral-700: #645c50;
+  --color-neutral-800: #474238;
+  --color-neutral-900: #2e2b25;
+
+  --color-accent-100: #fff2eb;
+  --color-accent-200: #ffe1d0;
+  --color-accent-300: #ffc6a5;
+  --color-accent-400: #f6a06b;
+  --color-accent-500: #d67f48;
+  --color-accent-600: #b2622d;
+  --color-accent-700: #8c491a;
+  --color-accent-800: #643312;
+  --color-accent-900: #402310;
+
+  --color-accent-2-100: #f0fae1;
+  --color-accent-2-200: #e1eecc;
+  --color-accent-2-300: #ccdbb2;
+  --color-accent-2-400: #aebf92;
+  --color-accent-2-500: #8fa073;
+  --color-accent-2-600: #728157;
+  --color-accent-2-700: #56633f;
+  --color-accent-2-800: #3d472b;
+  --color-accent-2-900: #272e1b;
+
+  /* — type — */
+  /* --font-heading / --font-body are injected by next/font in layout.tsx. */
+  --font-heading-weight: 400;
+  --text-body: 15px;
+  --line-body: 1.55;
+  --line-heading: 1.12;
+  --tracking-heading: -0.015em;
+
+  /* — spacing (1.10× density scale) — */
+  --space-1: 4.4px;
+  --space-2: 8.8px;
+  --space-3: 13.2px;
+  --space-4: 17.6px;
+  --space-6: 26.4px;
+  --space-8: 35.2px;
+  --gutter: 20px;
+
+  /* — radii — nothing in this design has sharp corners — */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+
+  /* — elevation — */
+  --shadow-sm: 0 1px 2px rgba(46, 43, 37, 0.14);
+  --shadow-md: 0 3px 10px rgba(46, 43, 37, 0.16);
+  --shadow-lg: 0 12px 32px rgba(46, 43, 37, 0.22);
+
+  /* — layout — */
+  --phone-max: 430px;
+
+  /* — per-person identity colours — */
+  --person-jenn: var(--color-accent-700);
+  --person-jenn-rail: var(--color-accent);
+  --person-eddy: var(--color-accent-2-700);
+  --person-eddy-rail: var(--color-accent-2-600);
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   The tier system.
+
+   Each tier carries four colours. `--tier-ink` is for text on the solid
+   `--tier-band`; `--tier-tint-ink` is for text on the light `--tier-tint`.
+   THESE TWO MUST STAY SEPARATE — using one ink for both grounds is the single
+   most common way to break contrast here.
+
+   White ink on the 600-step bands measures 3.8–4.1:1, so ONLY display-size
+   text may sit on a band (the 40px/42px tier letter and the 24px bold score).
+   Anything below ~18.66px bold belongs on a tint, using --tier-tint-ink.
+
+   Setting data-tier on an element scopes all five values to its subtree, so a
+   component can never pair one tier's band with another tier's ink.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+[data-tier="S"] {
+  --tier-band: var(--color-accent-600);
+  --tier-ink: var(--color-neutral-100);
+  --tier-tint: var(--color-accent-200);
+  --tier-tint-ink: var(--color-accent-900);
+  --tier-bar: var(--color-accent-600);
+}
+[data-tier="A"] {
+  --tier-band: var(--color-accent-700);
+  --tier-ink: var(--color-neutral-100);
+  --tier-tint: var(--color-accent-100);
+  --tier-tint-ink: var(--color-accent-900);
+  --tier-bar: var(--color-accent-700);
+}
+[data-tier="B"] {
+  --tier-band: var(--color-accent-2-600);
+  --tier-ink: var(--color-neutral-100);
+  --tier-tint: var(--color-accent-2-200);
+  --tier-tint-ink: var(--color-accent-2-900);
+  --tier-bar: var(--color-accent-2-600);
+}
+[data-tier="C"] {
+  --tier-band: var(--color-accent-2-700);
+  --tier-ink: var(--color-neutral-100);
+  --tier-tint: var(--color-accent-2-100);
+  --tier-tint-ink: var(--color-accent-2-900);
+  --tier-bar: var(--color-accent-2-700);
+}
+[data-tier="D"] {
+  --tier-band: var(--color-neutral-600);
+  --tier-ink: var(--color-neutral-100);
+  --tier-tint: var(--color-neutral-200);
+  --tier-tint-ink: var(--color-neutral-900);
+  --tier-bar: var(--color-neutral-600);
+}
+[data-tier="F"] {
+  --tier-band: var(--color-neutral-800);
+  --tier-ink: var(--color-neutral-100);
+  --tier-tint: var(--color-neutral-300);
+  --tier-tint-ink: var(--color-neutral-900);
+  --tier-bar: var(--color-neutral-800);
+}
+
+/* Half-logged is NOT a tier. It deliberately stays pale with dark ink so an
+   unfinished place looks unfinished beside six confident dark stamps. It must
+   never be rendered as though it had a combined tier. */
+[data-tier="half"] {
+  --tier-band: var(--color-neutral-300);
+  --tier-ink: var(--color-neutral-800);
+  --tier-tint: var(--color-neutral-100);
+  --tier-tint-ink: var(--color-neutral-800);
+  --tier-bar: var(--color-neutral-400);
+}

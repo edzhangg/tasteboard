@@ -1,0 +1,96 @@
+/* No transform-based animation on this overlay: a transformed ancestor would
+   make inset: 0 resolve against it instead of the viewport. */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: var(--color-neutral-900);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 24px;
+  overflow: auto;
+  font-family: var(--font-body);
+}
+
+/* The shrink constraints matter: without min-height 0 / max-height 100% the
+   photo cannot shrink on a short viewport and pushes Close off-screen. */
+.stage {
+  flex: 0 1 auto;
+  min-height: 0;
+  max-height: 100%;
+  max-width: min(360px, 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.photo {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: var(--radius-lg);
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.settling {
+  transition: transform 0.22s ease, opacity 0.22s ease;
+}
+
+.captionRow {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.arrow {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-neutral-700);
+  background: transparent;
+  color: var(--color-neutral-100);
+  font-size: 18px;
+}
+
+.arrow:hover {
+  background: var(--color-neutral-800);
+}
+
+.caption {
+  text-align: center;
+  color: var(--color-neutral-100);
+}
+
+.captionLabel {
+  font-family: var(--font-heading);
+  font-size: 15px;
+}
+
+.captionCount {
+  font-size: 12px;
+  color: var(--color-neutral-300);
+  margin-top: 3px;
+}
+
+.close {
+  flex: 0 0 auto;
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: var(--radius-pill);
+  border: none;
+  background: var(--color-neutral-100);
+  color: var(--color-neutral-900);
+  font-family: var(--font-heading);
+  font-size: 14px;
+}

@@ -1,0 +1,22 @@
+/* The design is authored for a 430px phone viewport. On desktop the column is
+   centred on a neutral backdrop so it can be viewed — there is no separate
+   desktop layout. */
+.backdrop {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--color-neutral-300);
+  display: flex;
+  justify-content: center;
+}
+
+.column {
+  width: 100%;
+  max-width: var(--phone-max);
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--color-bg);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}

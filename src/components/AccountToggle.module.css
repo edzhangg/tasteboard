@@ -1,0 +1,39 @@
+.toggle {
+  display: flex;
+  background: var(--color-neutral-200);
+  border-radius: var(--radius-pill);
+  padding: 3px;
+  gap: 2px;
+}
+
+.tab {
+  min-height: 36px;
+  padding: 0 15px;
+  border: none;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  background: transparent;
+  color: var(--color-neutral-700);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.tab:hover:not(.active) {
+  color: var(--color-neutral-900);
+}
+
+.active {
+  background: var(--color-accent-700);
+  color: var(--color-neutral-100);
+  box-shadow: var(--shadow-sm);
+}
+
+.active:hover {
+  background: var(--color-accent-600);
+}
+
+.active:active {
+  background: var(--color-accent-700);
+}
