@@ -26,14 +26,14 @@ const INDEX_KEY = "tasteboard:places";
 const placeKey = (id: string) => `tasteboard:place:${id}`;
 
 const hasRedis =
-  !!process.env.UPSTASH_REDIS_REST_URL && !!process.env.UPSTASH_REDIS_REST_TOKEN;
+  !!process.env.KV_REST_API_URL && !!process.env.KV_REST_API_TOKEN;
 
 let redis: Redis | null = null;
 function client(): Redis {
   if (!redis) {
     redis = new Redis({
-      url: process.env.UPSTASH_REDIS_REST_URL!,
-      token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+      url: process.env.KV_REST_API_URL!,
+      token: process.env.KV_REST_API_TOKEN!,
     });
   }
   return redis;
@@ -52,7 +52,7 @@ function memory(): Map<string, Place> {
       SEED_PLACES.map((p) => [p.id, structuredClone(p)]),
     );
     console.warn(
-      "[tasteboard] No UPSTASH_REDIS_REST_URL configured — using an in-memory " +
+      "[tasteboard] No KV_REST_API_URL configured — using an in-memory " +
         "store seeded with demo data. Visits will not persist or sync between devices.",
     );
   }

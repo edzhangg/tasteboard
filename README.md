@@ -33,8 +33,8 @@ degrades gracefully if left blank, so you can do them in any order.
 ### 1. Datastore — Upstash Redis (required for real use)
 
 ```
-UPSTASH_REDIS_REST_URL=
-UPSTASH_REDIS_REST_TOKEN=
+KV_REST_API_URL=
+KV_REST_API_TOKEN=
 ```
 
 **Why this choice:** the accounts stay honor-system (no auth), but the board has
