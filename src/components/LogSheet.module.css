@@ -2,9 +2,10 @@
   position: fixed;
   inset: 0;
   z-index: 40;
-  background: var(--color-neutral-300);
+  background: var(--color-neutral-100);
   display: flex;
   justify-content: center;
+  align-items: flex-start;
   overflow-y: auto;
 }
 
@@ -89,6 +90,13 @@
 .inputHalf {
   flex: 1;
   min-width: 0;
+}
+
+/* iOS Safari's native date control ignores box-sizing and can render wider
+   than the pill it sits in unless appearance is reset. */
+input[type="date"].input {
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .group {

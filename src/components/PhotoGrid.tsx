@@ -93,8 +93,6 @@ export function PhotoGrid({
         type="file"
         className={styles.file}
         accept="image/*"
-        // capture is honoured on phones: the camera opens directly.
-        capture="environment"
         multiple
         onChange={(event) => {
           void handleFiles(event.target.files);
