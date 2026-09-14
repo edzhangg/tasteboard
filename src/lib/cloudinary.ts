@@ -110,12 +110,15 @@ export async function uploadPhoto(file: File): Promise<string> {
 
   const compressed = await compressImage(file);
 
+  // Cloudinary requires `file` to be the last field in the multipart body —
+  // otherwise it can't associate the signature/api_key with the request and
+  // silently falls back to unsigned-upload validation.
   const form = new FormData();
-  form.append("file", compressed, file.name);
   form.append("api_key", sign.apiKey);
   form.append("timestamp", String(sign.timestamp));
   form.append("folder", sign.folder);
   form.append("signature", sign.signature);
+  form.append("file", compressed, file.name);
 
   const upload = await fetch(
     `https://api.cloudinary.com/v1_1/${sign.cloudName}/image/upload`,
