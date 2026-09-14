@@ -14,7 +14,7 @@ import type { PersonId, Place, Visit } from "@/lib/types";
 
 /* ── sheet state ─────────────────────────────────────────────────────────── */
 
-export type SheetMode = "new" | "add" | "edit";
+export type SheetMode = "new" | "add" | "edit" | "editPlace";
 
 export interface SheetState {
   mode: SheetMode;
@@ -49,6 +49,7 @@ interface BoardContext {
   openNewPlaceSheet: () => void;
   openAddVisitSheet: (placeId: string) => void;
   openEditVisitSheet: (placeId: string, visit: Visit) => void;
+  openEditPlaceSheet: (placeId: string) => void;
   patchSheet: (patch: Partial<SheetState>) => void;
   closeSheet: () => void;
   saveSheet: () => Promise<string | null>;
@@ -196,6 +197,27 @@ export function BoardProvider({
     });
   }, []);
 
+  const openEditPlaceSheet = useCallback(
+    (placeId: string) => {
+      const place = places.find((p) => p.id === placeId);
+      if (!place) return;
+      setSheet({
+        mode: "editPlace",
+        placeId,
+        // Unused by this mode, but SheetState requires them.
+        score: 0,
+        scoreText: null,
+        date: "",
+        note: "",
+        photos: [],
+        name: place.name,
+        cuisine: place.cuisine,
+        area: place.area,
+      });
+    },
+    [places],
+  );
+
   const patchSheet = useCallback((patch: Partial<SheetState>) => {
     setSheet((current) => (current ? { ...current, ...patch } : current));
   }, []);
@@ -207,48 +229,66 @@ export function BoardProvider({
     if (!sheet) return null;
     setSaving(true);
     try {
-      const visit = {
-        by: user,
-        date: sheet.date,
-        score: sheet.score,
-        note: sheet.note,
-        photos: sheet.photos,
-      };
-
       let response: Response;
-      if (sheet.mode === "new") {
-        response = await fetch("/api/places", {
-          method: "POST",
+      if (sheet.mode === "editPlace") {
+        response = await fetch(`/api/places/${sheet.placeId}`, {
+          method: "PATCH",
           headers: { "content-type": "application/json" },
           body: JSON.stringify({
             name: sheet.name ?? "",
             cuisine: sheet.cuisine ?? "",
             area: sheet.area ?? "",
-            visit,
           }),
         });
-      } else if (sheet.mode === "edit") {
-        response = await fetch(
-          `/api/places/${sheet.placeId}/visits/${sheet.visitId}`,
-          {
-            method: "PATCH",
+      } else {
+        const visit = {
+          by: user,
+          date: sheet.date,
+          score: sheet.score,
+          note: sheet.note,
+          photos: sheet.photos,
+        };
+
+        if (sheet.mode === "new") {
+          response = await fetch("/api/places", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+              name: sheet.name ?? "",
+              cuisine: sheet.cuisine ?? "",
+              area: sheet.area ?? "",
+              visit,
+            }),
+          });
+        } else if (sheet.mode === "edit") {
+          response = await fetch(
+            `/api/places/${sheet.placeId}/visits/${sheet.visitId}`,
+            {
+              method: "PATCH",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify(visit),
+            },
+          );
+        } else {
+          response = await fetch(`/api/places/${sheet.placeId}/visits`, {
+            method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(visit),
-          },
-        );
-      } else {
-        response = await fetch(`/api/places/${sheet.placeId}/visits`, {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify(visit),
-        });
+          });
+        }
       }
 
       if (!response.ok) throw new Error("save failed");
       const { place } = (await response.json()) as { place: Place };
       mergePlace(place);
       setSheet(null);
-      showToast(sheet.mode === "edit" ? "Visit updated" : "Visit logged");
+      showToast(
+        sheet.mode === "editPlace"
+          ? "Place updated"
+          : sheet.mode === "edit"
+            ? "Visit updated"
+            : "Visit logged",
+      );
       return place.id;
     } catch {
       showToast("Couldn't save that visit");
@@ -300,6 +340,7 @@ export function BoardProvider({
       openNewPlaceSheet,
       openAddVisitSheet,
       openEditVisitSheet,
+      openEditPlaceSheet,
       patchSheet,
       closeSheet,
       saveSheet,
@@ -321,6 +362,7 @@ export function BoardProvider({
       openNewPlaceSheet,
       openAddVisitSheet,
       openEditVisitSheet,
+      openEditPlaceSheet,
       patchSheet,
       closeSheet,
       saveSheet,

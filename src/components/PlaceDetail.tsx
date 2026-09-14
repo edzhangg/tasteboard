@@ -8,6 +8,7 @@ import { PEOPLE } from "@/lib/types";
 import type { PersonId, Place } from "@/lib/types";
 import { useBoard } from "@/state/BoardProvider";
 import { AccountToggle } from "./AccountToggle";
+import { PencilIcon } from "./Icon";
 import { PhoneShell } from "./PhoneShell";
 import { SharedTake } from "./SharedTake";
 import { VisitRow } from "./VisitRow";
@@ -40,7 +41,7 @@ function PersonRow({ person, score }: { person: PersonId; score: number | null }
 }
 
 export function PlaceDetail({ placeId }: { placeId: string }) {
-  const { places, user, openAddVisitSheet } = useBoard();
+  const { places, user, openAddVisitSheet, openEditPlaceSheet } = useBoard();
   const place = places.find((p) => p.id === placeId);
 
   if (!place) {
@@ -59,17 +60,26 @@ export function PlaceDetail({ placeId }: { placeId: string }) {
     );
   }
 
-  return <Detail place={place} user={user} onAddVisit={() => openAddVisitSheet(place.id)} />;
+  return (
+    <Detail
+      place={place}
+      user={user}
+      onAddVisit={() => openAddVisitSheet(place.id)}
+      onEdit={() => openEditPlaceSheet(place.id)}
+    />
+  );
 }
 
 function Detail({
   place,
   user,
   onAddVisit,
+  onEdit,
 }: {
   place: Place;
   user: PersonId;
   onAddVisit: () => void;
+  onEdit: () => void;
 }) {
   const { jenn, eddy, combined } = scoresOf(place);
   const halfLogged = combined == null;
@@ -96,7 +106,17 @@ function Detail({
       </div>
 
       <div className={styles.titleBlock}>
-        <h1 className={styles.title}>{place.name}</h1>
+        <div className={styles.titleRow}>
+          <h1 className={styles.title}>{place.name}</h1>
+          <button
+            type="button"
+            className={styles.editButton}
+            aria-label="Edit place details"
+            onClick={onEdit}
+          >
+            <PencilIcon size={15} />
+          </button>
+        </div>
         <div className={styles.titleMeta}>
           {place.cuisine} · {place.area}
         </div>

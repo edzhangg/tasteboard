@@ -42,7 +42,8 @@ export function LogSheet() {
     [],
   );
 
-  if (!sheet) return null;
+  // The place-details edit sheet is its own component.
+  if (!sheet || sheet.mode === "editPlace") return null;
 
   const place = places.find((p) => p.id === sheet.placeId);
   const who = PEOPLE[user];

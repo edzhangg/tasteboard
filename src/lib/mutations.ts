@@ -22,6 +22,12 @@ export const newPlaceInput = z.object({
   visit: visitInput,
 });
 
+export const placeDetailsInput = z.object({
+  name: z.string().max(120).default(""),
+  cuisine: z.string().max(80).default(""),
+  area: z.string().max(80).default(""),
+});
+
 export type VisitInput = z.infer<typeof visitInput>;
 
 /** Thrown for anything the client got wrong; carries an HTTP status. */
@@ -57,6 +63,23 @@ export async function createPlace(input: z.infer<typeof newPlaceInput>): Promise
   };
 
   return saveWithTakePolicy(place);
+}
+
+export async function updatePlaceDetails(
+  placeId: string,
+  input: z.infer<typeof placeDetailsInput>,
+): Promise<Place> {
+  const place = await getPlace(placeId);
+  if (!place) throw new MutationError("No such place", 404);
+
+  // Name/cuisine/area never feed the shared take (see takeHash), so this
+  // never owes a regeneration — saveWithTakePolicy is just the usual save path.
+  return saveWithTakePolicy({
+    ...place,
+    name: input.name.trim() || "Untitled place",
+    cuisine: input.cuisine.trim() || "Unfiled",
+    area: input.area.trim() || "—",
+  });
 }
 
 export async function addVisit(placeId: string, input: VisitInput): Promise<Place> {
