@@ -12,6 +12,12 @@
   gap: 12px;
 }
 
+.searchRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .title {
   font-family: var(--font-heading);
   font-size: 30px;
@@ -57,7 +63,7 @@
   position: sticky;
   bottom: 0;
   margin-top: auto;
-  padding: 16px var(--gutter) 20px;
+  padding: 16px var(--gutter) calc(20px + env(safe-area-inset-bottom));
   display: flex;
   justify-content: center;
   background: linear-gradient(to top, var(--color-bg) 55%, transparent);

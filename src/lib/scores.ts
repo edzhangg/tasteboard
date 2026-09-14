@@ -66,6 +66,27 @@ export function filterPlaces(places: Place[], filter: Filter): Place[] {
   });
 }
 
+export function filterByArea(places: Place[], area: string): Place[] {
+  if (area === "all") return places;
+  return places.filter((p) => p.area === area);
+}
+
+/** Lowercases and strips accents, so "cafe" matches "Café". */
+function normalizeForSearch(value: string): string {
+  return value
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .toLowerCase();
+}
+
+export function filterBySearch(places: Place[], query: string): Place[] {
+  const q = normalizeForSearch(query.trim());
+  if (!q) return places;
+  return places.filter((p) =>
+    [p.name, p.cuisine, p.area].some((field) => normalizeForSearch(field).includes(q)),
+  );
+}
+
 /**
  * Tier sorts rank by tier index first (S→F), then by raw score descending,
  * with unlogged/half-logged last.

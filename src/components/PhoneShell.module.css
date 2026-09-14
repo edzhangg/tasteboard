@@ -19,4 +19,8 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  /* Standalone (added-to-home-screen) mode has no browser chrome, so the
+     status bar/notch sits directly over the page unless we push content
+     below it ourselves. A no-op on regular Safari/Chrome. */
+  padding-top: env(safe-area-inset-top);
 }

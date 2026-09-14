@@ -21,7 +21,7 @@
 }
 
 .header {
-  padding: 18px var(--gutter) 14px;
+  padding: calc(18px + env(safe-area-inset-top)) var(--gutter) 14px;
   display: flex;
   align-items: flex-start;
   gap: 12px;
@@ -175,7 +175,7 @@ input[type="date"].input {
 .actions {
   position: sticky;
   bottom: 0;
-  padding: 14px var(--gutter) 20px;
+  padding: 14px var(--gutter) calc(20px + env(safe-area-inset-bottom));
   background: var(--color-neutral-100);
   border-top: 1px solid var(--color-neutral-200);
   display: flex;
