@@ -83,7 +83,9 @@
   border-radius: var(--radius-pill);
   background: var(--color-bg);
   font-family: var(--font-body);
-  font-size: 15px;
+  /* 16px is the threshold below which mobile Safari/Chrome zoom the page on
+     focus. */
+  font-size: 16px;
   color: var(--color-neutral-900);
 }
 
@@ -149,7 +151,7 @@ input[type="date"].input {
   border-radius: var(--radius-md);
   background: var(--color-bg);
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.5;
   color: var(--color-neutral-900);
   resize: vertical;

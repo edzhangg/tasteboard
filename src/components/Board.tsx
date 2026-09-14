@@ -87,8 +87,8 @@ export function Board() {
               </div>
               <div className={styles.emptyBody}>
                 {filtersActive
-                  ? "Clear the search or filters, or go eat something."
-                  : "Clear the filter, or go eat something."}
+                  ? "Clear the search or filters, or add an experience."
+                  : "Clear the filter, or add an experience."}
               </div>
             </>
           )}
